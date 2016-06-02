@@ -45,6 +45,8 @@ is the last version intended to work with Django 1.4. New features will not be b
 Usage and demo
 ==============
 
+IMPORTANT : installation information is not up to date ! to get this repo do not use pypi for the moment but clone this repo !
+
 See the `yawd-admin documentation <http://yawd-admin.readthedocs.org/en/latest/>`_ 
 for information on how to install the demo and use yawd-admin.
 
@@ -73,9 +75,3 @@ Admin db options
 ++++++++++++++++
 
 .. image:: docs/admin-options-full.png
-
-
-.. image:: https://d2weczhvl823v0.cloudfront.net/yawd/yawd-admin/trend.png
-   :alt: Bitdeli badge
-   :target: https://bitdeli.com/free
-

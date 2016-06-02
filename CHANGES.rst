@@ -3,6 +3,10 @@
 Changelog
 +++++++++
 
+v.0.7.3, 2016.06.02
+===================
+Django 1.8 compatibility
+
 v.0.7.2, 2016.05.27
 ===================
 Django 1.7 compatibility

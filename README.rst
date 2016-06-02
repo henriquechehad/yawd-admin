@@ -21,7 +21,7 @@ site and offers the following:
 History
 ==============
 
-master (dev)
+v0.7.3
 ++++++++++++
 is developped under django 1.8.x and does NOT work with older Django releases.
 

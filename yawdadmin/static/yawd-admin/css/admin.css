@@ -7,7 +7,7 @@
 	.container-fluid {
 		padding: 10px;
 	}
-	.navbar-fixed-top .container-fluid {
+	.navbar-static-top .container-fluid {
 		padding: 0 20px 0 20px;
 	}
 }
@@ -150,11 +150,11 @@ fieldset {
 	padding-right: 6px;
 }
 
-.navbar-fixed-top .nav-collapse i {
+.navbar-static-top .navbar-collapse i {
 	opacity: 0.6;
 }
 
-.navbar-fixed-top .nav-collapse li:hover i {
+.navbar-static-top .navbar-collapse li:hover i {
 	opacity: 1;
 }
 
@@ -227,7 +227,7 @@ fieldset {
 }
 
 @media (max-width: 979px) {
-	.navbar-fixed-top {
+	.navbar-static-top {
 		margin-bottom: 0; 
 	}
 	.main {
@@ -267,7 +267,7 @@ fieldset {
 	background-color: #005E9D;
 }
 
-.navbar-blue .nav > li:hover > a, .navbar-blue.navbar-fixed-top .btn-navbar:hover span {
+.navbar-blue .nav > li:hover > a, .navbar-blue.navbar-static-top .btn-navbar:hover span {
 	opacity: 1;
 }
 
@@ -276,7 +276,7 @@ fieldset {
 	border-right-color: #3497C2;
 }
 
-.navbar-blue.navbar-fixed-top .nav-collapse i, .navbar-blue.navbar-fixed-top .btn-navbar span {
+.navbar-blue.navbar-static-top .navbar-collapse i, .navbar-blue.navbar-static-top .btn-navbar span {
 	opacity: .9;
 }
 
@@ -293,18 +293,18 @@ fieldset {
 }
 
 @media (max-width: 979px) {
-	.navbar-blue .nav-collapse .nav > li > a, .navbar-blue .nav-collapse .dropdown-menu a {
+	.navbar-blue .navbar-collapse .nav > li > a, .navbar-blue .navbar-collapse .dropdown-menu a {
 		color: #eee !important;
 	}
 
-	.navbar-blue .nav-collapse .nav > li > a:hover,
-	.navbar-blue .nav-collapse .nav > li > a:focus,
-	.navbar-blue .nav-collapse .dropdown-menu a:hover,
-	.navbar-blue .nav-collapse .dropdown-menu a:focus {
+	.navbar-blue .navbar-collapse .nav > li > a:hover,
+	.navbar-blue .navbar-collapse .nav > li > a:focus,
+	.navbar-blue .navbar-collapse .dropdown-menu a:hover,
+	.navbar-blue .navbar-collapse .dropdown-menu a:focus {
 		background-color: #005E9D !important;
 	}
 	
-	.nav-collapse .nav > li > a, .nav-collapse .dropdown-menu a {
+	.navbar-collapse .nav > li > a, .navbar-collapse .dropdown-menu a {
 		color: #eee !important;
 	}
 }
@@ -1046,7 +1046,7 @@ ul.toplinks li {
 	margin-bottom: 0;
 }
 
-.form-search .input-append {
+.form-search .input-group {
 	height: 37px;
 }
 
@@ -2766,8 +2766,8 @@ a .icon-rotate-90:before,a .icon-rotate-180:before,a .icon-rotate-270:before,a .
 
 /* Print directives */
 @media print {
-	#logged-user-menu, .navbar-fixed-top .nav-collapse,
-	.navbar-fixed-top .btn-navbar, table .sortoptions,
+	#logged-user-menu, .navbar-static-top .navbar-collapse,
+	.navbar-static-top .btn-navbar, table .sortoptions,
 	ul.breadcrumb, #changelist-top {
 		display: none !important;
 	}

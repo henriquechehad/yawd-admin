@@ -13,7 +13,7 @@
 			</p>{% endfor %}{% endif %}
 			<div class="box">
 				<h3 class="title">{% trans 'Sign In' %}</h3>
-				<form class="form-inline pull-left" action="{{ app_path }}" method="post">
+				<form class="form-inline pull-xs-left" action="{{ app_path }}" method="post">
 					{% csrf_token %}
 					<input type="hidden" name="this_is_the_login_form" value="1" />
 					<input type="hidden" name="next" value="{{ next }}" />

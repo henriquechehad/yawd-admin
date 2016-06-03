@@ -24,7 +24,7 @@
 {% block content %}
 	<div id="content-main">
 		<section class="row">
-			<div class="span6">
+			<div class="col-md-6">
 				{% if app_list %}
 					{% for app in app_list %}
 						<table class="table table-rounded table-striped" summary="{% blocktrans with app.name as name %}Models available in the {{ name }} application.{% endblocktrans %}">

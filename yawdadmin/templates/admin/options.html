@@ -20,7 +20,7 @@
 					</div>
 				</div>{% endif %}{% if optionset_admin.form.errors %}
 				<div class="row-fluid">
-					<span class="span12 alert alert-error">
+					<span class="col-md-12 alert alert-error">
 						<button type="button" class="close" data-dismiss="alert">×</button>
 						{% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
 						{{ form.non_field_errors }}

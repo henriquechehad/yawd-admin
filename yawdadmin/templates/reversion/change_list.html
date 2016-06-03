@@ -4,13 +4,13 @@
 
 {% block object-tools-items %}
 {% if has_add_permission %}
-        <div class="span2">
+        <div class="col-sm-2">
             <a href="add/{% if is_popup %}?{% if is_popup_var %}{{is_popup_var}}{% else %}_popup{% endif %}=1{% endif %}" class="big-button">
                 <i class="add-item"></i> {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
             </a>
         </div>
     {% if not is_popup %}
-        <div class="span2">
+        <div class="col-sm-2">
             <a href="{% url opts|admin_urlname:'recoverlist' %}" class="recoverlink big-button">
                 <i class="database-item"></i> {% blocktrans with cl.opts.verbose_name_plural|escape as name %}Recover deleted {{name}}{% endblocktrans %}
             </a>

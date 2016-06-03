@@ -56,8 +56,8 @@
 			</ul>{% endif %}{% endblock %}
 
 {% block object-tools %}
-			<div class="row-fluid nav object-tools">{% block object-tools-items %}{% if has_add_permission %}
-				<div class="span2">
+			<div class="row nav object-tools">{% block object-tools-items %}{% if has_add_permission %}
+				<div class="col-sm-2">
 					<a href="add/{% if is_popup %}?{% if is_popup_var %}{{is_popup_var}}{% else %}_popup{% endif %}=1{% endif %}" class="big-button">
 						<i class="add-item"></i> {% trans 'Add' %}
 					</a>
@@ -65,8 +65,8 @@
 			</div>{% endblock %}
 
 {% block content %}
-			<div class="row-fluid show-grid">
-				<div class="span12">
+			<div class="row show-grid">
+				<div class="col-md-12">
 					<div id="content-main">{% if cl.formset.errors %}
 						<p class="alert alert-error close">
 							{% blocktrans count cl.formset.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}

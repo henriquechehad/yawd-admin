@@ -28,12 +28,12 @@ The html in templates for object tools is like this:
 .. code-block:: django
 
 	{% block object-tools-items %}
-	<div class="span2">
+	<div class="col-sm-2">
 		<a href="history/" class="big-button">
 			<i class="database-item"></i> {% trans "History" %}
 		</a>
 	</div>{% if has_absolute_url %}
-	<div class="span2">
+	<div class="col-sm-2">
 		<a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="big-button">
 			<i class="lookup-item"></i> {% trans "View on site" %}
 		</a>

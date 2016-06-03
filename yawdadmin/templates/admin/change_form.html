@@ -93,13 +93,13 @@
 		<div class="row nav object-tools">
 
 			{% block object-tools-items %}
-				<div class="span2">
+				<div class="col-sm-2">
 					<a href="{% url opts|admin_urlname:'history' original.pk|admin_urlquote %}" class="big-button">
 						<i class="database-item"></i> {% trans "History" %}
 					</a>
 				</div>
 				{% if has_absolute_url %}
-					<div class="span2">
+					<div class="col-sm-2">
 						<a href="{% url 'admin:view_on_site' content_type_id original.pk %}" class="big-button">
 							<i class="lookup-item"></i> {% trans "View on site" %}
 						</a>

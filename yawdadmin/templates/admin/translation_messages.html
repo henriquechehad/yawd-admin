@@ -47,14 +47,14 @@
 			</ul>{% endblock %}
 
 {% block object-tools %}{% if not error %}
-			<div class="row-fluid nav">{% block object-tools-items %}{% if perms.translations.edit_translations %}
-				<div class="span2">
+			<div class="row nav">{% block object-tools-items %}{% if perms.translations.edit_translations %}
+				<div class="col-sm-2">
 					<a id="{% if warning %}update-messages{% else %}generate-messages{% endif %}" href="generate/{% if not warning %}?delete=1{% endif %}" class="big-button">
 						<i class="processing-item"></i>
 						{% if warning %}{% trans "Generate messages" %}{% else %}{% trans "Regenerate messages" %}{% endif %}
 					</a>
 				</div>{% if not warning %}
-				<div class="span2">
+				<div class="col-sm-2">
 					<a id="update-messages" href="generate/" class="big-button">
 						<i class="reload-item"></i>
 						{% trans "Update messages" %}

@@ -19,7 +19,7 @@
 		  <link rel="stylesheet" href="{{ADMIN_EXTRA_CSS}}" type="text/css" media="screen" />
 		{% endif %}
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="{% static "yawd-admin/js/bootstrap.js" %}"></script>
 
 		{% block extrahead %}{% endblock %}
@@ -90,14 +90,14 @@
 
 				{% block content %}
 				<div class="row show-grid">
-					<div class="span9">
+					<div class="col-sm-9">
 
 						{% block main-struct %}
 							{{ content }}
 						{% endblock %}
 
 					</div>
-					<div class="span3">
+					<div class="col-sm-3">
 
 						{% block sidebar %}
 						{% endblock %}

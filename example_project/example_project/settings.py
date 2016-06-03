@@ -23,7 +23,7 @@ SITE_ID = 1
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = '/static/'
 
 STATICFILES_FINDERS = (
@@ -53,10 +53,10 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'demo_application',
     # Yawdadmin must be above the admin aplication
     'yawdadmin',
     'django.contrib.admin',
+    'demo_application',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

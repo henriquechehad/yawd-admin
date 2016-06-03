@@ -1,0 +1,1 @@
+git+git://github.com/mwolff44/yawd-admin.git@master#egg=yawd-admin

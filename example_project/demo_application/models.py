@@ -1,23 +1,23 @@
 from datetime import date
 from django.db import models
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
 from django.utils.timezone import now
 
 
 class SideBarMenuExample(models.Model):
     #HTML in help text is allowed in yawd-admin
-    title =  models.CharField(max_length='50', help_text='<strong>The affix</strong>'\
-            ' example title. Help text may include HTML.')
-    field1 =  models.CharField(max_length='50', blank=True)
-    field2 =  models.CharField(max_length='50', blank=True, help_text='Small input field')
-    field3 =  models.CharField(max_length='50', blank=True, help_text='Medium input field')
-    field4 =  models.CharField(max_length='50', blank=True, help_text='Large input field (default)')
-    field5 =  models.CharField(max_length='50', blank=True, help_text='XLarge input field')
-    field6 =  models.CharField(max_length='50', blank=True, help_text='XXLarge input field')
-    field7 =  models.CharField(max_length='50', blank=True)
-    field8 =  models.CharField(max_length='50', blank=True)
-    field9 =  models.CharField(max_length='50', blank=True)
+    title = models.CharField(
+        max_length=50,
+        help_text='<strong>The affix</strong> example title. '
+                  'Help text may include HTML.')
+    field1 = models.CharField(max_length=50, blank=True)
+    field2 = models.CharField(max_length=50, blank=True, help_text='Small input field')
+    field3 = models.CharField(max_length=50, blank=True, help_text='Medium input field')
+    field4 = models.CharField(max_length=50, blank=True, help_text='Large input field (default)')
+    field5 = models.CharField(max_length=50, blank=True, help_text='XLarge input field')
+    field6 = models.CharField(max_length=50, blank=True, help_text='XXLarge input field')
+    field7 = models.CharField(max_length=50, blank=True)
+    field8 = models.CharField(max_length=50, blank=True)
+    field9 = models.CharField(max_length=50, blank=True)
 
     class Meta:
         verbose_name = 'Side-Bar menu example'
@@ -28,14 +28,14 @@ class SideBarMenuExample(models.Model):
 
 
 class DragNDropChangelistExample(models.Model):
-    title =  models.CharField(max_length='50')
-    subtitle =  models.CharField(max_length='50', blank=True)
+    title =  models.CharField(max_length=50)
+    subtitle =  models.CharField(max_length=50, blank=True)
     boolean = models.BooleanField(default=True)
     order = models.IntegerField(default=0)
 
     class Meta:
         ordering = ('order',)
-        verbose_name = 'Drag n\' drop changelist example' 
+        verbose_name = 'Drag n\' drop changelist example'
         verbose_name_plural = 'Drag n\' drop changelist example'
 
     def __unicode__(self):
@@ -43,10 +43,10 @@ class DragNDropChangelistExample(models.Model):
 
 
 class InlineExample(models.Model):
-    title =  models.CharField(max_length='50')
+    title =  models.CharField(max_length=50)
 
     class Meta:
-        verbose_name = 'Inline example' 
+        verbose_name = 'Inline example'
         verbose_name_plural = 'Inline example'
 
     def __unicode__(self):
@@ -54,26 +54,26 @@ class InlineExample(models.Model):
 
 
 class InlineExampleExtension(models.Model):
-    field1 = models.CharField(max_length='50', blank=True)
-    field2 = models.CharField(max_length='50', blank=True)
-    field3 = models.CharField(max_length='50', blank=True)
+    field1 = models.CharField(max_length=50, blank=True)
+    field2 = models.CharField(max_length=50, blank=True)
+    field3 = models.CharField(max_length=50, blank=True)
     inline = models.OneToOneField(InlineExample)
 
     class Meta:
-        verbose_name = 'One-To-One inline example' 
+        verbose_name = 'One-To-One inline example'
         verbose_name_plural = 'One-To-One inline example'
 
 
 class StackedInlineExample(models.Model):
-    title =  models.CharField(max_length='50')    
-    field1 =  models.CharField(max_length='50', blank=True)
-    choice = models.CharField(max_length='20', choices=(('choice1', 'Choice 1'),
+    title =  models.CharField(max_length=50)
+    field1 =  models.CharField(max_length=50, blank=True)
+    choice = models.CharField(max_length=20, choices=(('choice1', 'Choice 1'),
                                                         ('choice2', 'Choice 2')))
 
     inline = models.ForeignKey(InlineExample)
 
     class Meta:
-        verbose_name = 'Stacked inline example' 
+        verbose_name = 'Stacked inline example'
         verbose_name_plural = 'Stacked inline example'
 
     def __unicode__(self):
@@ -81,13 +81,13 @@ class StackedInlineExample(models.Model):
 
 
 class TabularInlineExample(models.Model):
-    title =  models.CharField(max_length='50')    
-    choice = models.CharField(max_length='20', choices=(('choice1', 'Choice 1'),
+    title =  models.CharField(max_length=50)
+    choice = models.CharField(max_length=20, choices=(('choice1', 'Choice 1'),
                                                         ('choice2', 'Choice 2')))
     inline = models.ForeignKey(InlineExample)
 
     class Meta:
-        verbose_name = 'Tabular inline example' 
+        verbose_name = 'Tabular inline example'
         verbose_name_plural = 'Tabular inline example'
 
     def __unicode__(self):
@@ -95,15 +95,15 @@ class TabularInlineExample(models.Model):
 
 
 class ModalStackedInlineExample(models.Model):
-    title =  models.CharField(max_length='50')
+    title =  models.CharField(max_length=50)
     description = models.TextField(blank=True)
-    choice = models.CharField(max_length='20', choices=(('choice1', 'Choice 1'),
-                                                        ('choice2', 'Choice 2')))
+    choice = models.CharField(max_length=20, choices=(('choice1', 'Choice 1'),
+                                                      ('choice2', 'Choice 2')))
     date = models.DateField(default=date.today)
     inline = models.ForeignKey(InlineExample)
 
     class Meta:
-        verbose_name = 'Modal stacked inline example' 
+        verbose_name = 'Modal stacked inline example'
         verbose_name_plural = 'Modal stacked inline example'
 
     def __unicode__(self):
@@ -111,14 +111,14 @@ class ModalStackedInlineExample(models.Model):
 
 
 class PopupInlineExample(models.Model):
-    title =  models.CharField(max_length='50')
+    title =  models.CharField(max_length=50)
     description = models.TextField(blank=True)
     order = models.IntegerField(default=0)
     inline = models.ForeignKey(InlineExample)
 
     class Meta:
         ordering = ('order',)
-        verbose_name = 'Ajax/Popup inline example' 
+        verbose_name = 'Ajax/Popup inline example'
         verbose_name_plural = 'Ajax/Popup inline example'
 
     def __unicode__(self):
@@ -130,7 +130,7 @@ class NestedInlineExample(models.Model):
     popupinline = models.ForeignKey(PopupInlineExample)
 
     class Meta:
-        verbose_name = 'Nested inline' 
+        verbose_name = 'Nested inline'
         verbose_name_plural = 'Nested inline'
 
     def __unicode__(self):
@@ -175,12 +175,10 @@ class WidgetsExample(models.Model):
                                               'appends to this help text will be at '\
                                               'last removed in django 1.6!</p>')
 
-    
+
     class Meta:
-        verbose_name = 'Widgets example' 
+        verbose_name = 'Widgets example'
         verbose_name_plural = 'Widgets example'
 
     def __unicode__(self):
         return u'%s' % self.autocomplete
-
-    

@@ -6,9 +6,10 @@ from oauth2client.client import AccessTokenRefreshError
 from django.core.cache import cache
 from django.utils.translation import get_language
 from django.utils.encoding import force_str
-from yawdadmin import admin_site
+from yawdadmin.resources import admin_site
 from conf import settings as ls
 from models import AppOption
+from django.db.utils import OperationalError
 
 
 def get_option_cache_key(optionset_label):
@@ -21,18 +22,19 @@ def get_option(optionset_label, name, current_only=True, as_stored=False):
     only language-dependant options and decides whether to return its value
     for all languages or only the current language.
     """
-    #Hit the cache
+    # Hit the cache
     optionset = get_options(optionset_label, current_only, as_stored)
     if name in optionset:
         return optionset[name]
     return None
 
+
 def get_options(optionset_label, current_only=True, as_stored=False):
     """
     Return all options for this app_label as dictionary with the option name
-    being the key. 
+    being the key.
     """
-    #Hit the cache
+    # Hit the cache
     cached = {}
     if ls.ADMIN_CACHE_DB_OPTIONS:
         cached = cache.get(get_option_cache_key(optionset_label), {})
@@ -42,8 +44,12 @@ def get_options(optionset_label, current_only=True, as_stored=False):
     else:
         options = AppOption.objects.filter(optionset_label=optionset_label)
         if ls.ADMIN_CACHE_DB_OPTIONS:
-            cache.set(get_option_cache_key(optionset_label), options,
-                  ls.ADMIN_CACHE_DB_OPTIONS)
+            try:
+                cache.set(get_option_cache_key(optionset_label), options,
+                          ls.ADMIN_CACHE_DB_OPTIONS)
+            except OperationalError:
+                # Not exists the cache
+                return {}
 
     optionset_admin = admin_site.get_optionset_admin(optionset_label)
 
@@ -92,7 +98,7 @@ def get_option_value(optionset_admin, db_option, current_only, as_stored):
 
 
 def get_analytics_data(http):
-    
+
     #try to get cached data
     data = cache.get('yawdadmin_ga', None)
     if data:

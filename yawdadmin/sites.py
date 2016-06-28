@@ -16,6 +16,7 @@ from django.utils.encoding import force_text
 from django.utils.text import capfirst
 from django.utils.translation import ugettext as _, get_language
 from django.views.decorators.cache import never_cache
+from django.db.utils import OperationalError
 from conf import settings as ls
 from models import AppOption
 from views import AppOptionView, AnalyticsAuthView, AnalyticsConfigView, \
@@ -61,7 +62,7 @@ class YawdAdminDashboard(object):
                     self.app_dict[app_label]['sets'].append((set[0], models))
 
             self.app_dict[app_label]['show'] = self._get_has_any_perms(self.app_dict[app_label])
-    
+
     def _get_has_any_perms(self, data):
         for set in data['sets']:
             for m in set[1]:
@@ -91,7 +92,7 @@ class YawdAdminDashboard(object):
         if 'extras' in self.app_dict[app_label]:
             for extra in self.app_dict[app_label]['extras']:
                 if 'label' in extra and extra['label'] == label:
-                    return extra       
+                    return extra
 
     @classmethod
     def app_sorter(self, x):
@@ -114,7 +115,7 @@ class YawdAdminDashboard(object):
 
             if has_module_perms and not app_label in self.exclude:
                 perms = model_admin.get_model_perms(request)
-        
+
                 # Check whether user has any perm for this module.
                 # If so, add the module to the model_list.
                 if True in perms.values():
@@ -143,7 +144,7 @@ class YawdAdminDashboard(object):
 
         if not label:
             # Sort the apps by the specified sorter - alphabetically by default.
-            app_list = list(six.itervalues(self.app_dict))    
+            app_list = list(six.itervalues(self.app_dict))
             app_list.sort(key=self.app_sorter)
             return app_list
 
@@ -165,7 +166,7 @@ class YawdAdminSite(AdminSite):
 
     def check_dependencies(self):
         """
-        Override the default method to check that the 
+        Override the default method to check that the
         :class:`yawdadmin.middleware.PopupMiddleware` is installed
         and ``yawdadmin`` is found in the INSTALLED_APPS setting **before**
         ``django.contrib.admin``.
@@ -179,7 +180,7 @@ class YawdAdminSite(AdminSite):
             raise ImproperlyConfigured("Put 'yawdadmin' before "
                                        "'django.contrib.admin' in your "
                                        "INSTALLED_APPS setting to use the "
-                                       "yawd-admin application") 
+                                       "yawd-admin application")
         if not 'yawdadmin.middleware.PopupMiddleware' in settings.MIDDLEWARE_CLASSES and \
             DJANGO_VERSION[0]== 1 and DJANGO_VERSION[1] <= 5:
             raise ImproperlyConfigured("Put 'yawdadmin.middleware.PopupMiddleware' "
@@ -205,7 +206,7 @@ class YawdAdminSite(AdminSite):
                       url(r'^my-account/$', wrap(MyAccountView.as_view()), name='my-account'),
             )
 
-        up += super(YawdAdminSite, self).get_urls() 
+        up += super(YawdAdminSite, self).get_urls()
         return up
 
     def register_app_label(self, app_label, app_dict={}):
@@ -223,7 +224,7 @@ class YawdAdminSite(AdminSite):
         Otherwise, a custom menu can be constructed based on the children
         structure.
         The ``perms`` argument can be a function that will be called at
-        runtime. Given the request and a model item as keyword arguments, 
+        runtime. Given the request and a model item as keyword arguments,
         the function should return whether the item is to be displayed or
         not (``True`` or ``False``).
         """
@@ -231,7 +232,7 @@ class YawdAdminSite(AdminSite):
         for model, model_admin in self._registry.iteritems():
             if not model._meta.app_label in app_labels:
                 app_labels.append(model._meta.app_label)
-        
+
         if isinstance(item, basestring) and item in app_labels:
             if not item in self._top_menu:
                 self._top_menu[item] = icon_class
@@ -271,7 +272,7 @@ class YawdAdminSite(AdminSite):
 
                 if has_module_perms:
                     perms = model_admin.get_model_perms(request)
-        
+
                     # Check whether user has any perm for this module.
                     # If so, add the module to the model_list.
                     if True in perms.values():
@@ -332,11 +333,15 @@ class YawdAdminSite(AdminSite):
             admin_site.register_options(OptionSetAdminClass)
         """
         global _optionset_labels
-        if not optionset_admin.optionset_label in _optionset_labels:
-            #Add admin optionset to the registry
-            _optionset_labels[optionset_admin.optionset_label] = optionset_admin
-            #Initialize options
-            optionset_admin()
+        if optionset_admin.optionset_label not in _optionset_labels:
+            # Add admin optionset to the registry
+            _optionset_labels[
+                optionset_admin.optionset_label] = optionset_admin
+            # Initialize options
+            try:
+                optionset_admin()
+            except OperationalError:
+                print("Missing AppOption table in db")
 
     def unregister_options(self, optionset_admin, delete_db_records=False):
         optionset_label = optionset_admin.optionset_label
@@ -347,7 +352,7 @@ class YawdAdminSite(AdminSite):
 
     def get_option_admin_urls(self):
         """
-        Return a list of key-value pairs, containing all available optionset urls 
+        Return a list of key-value pairs, containing all available optionset urls
         """
         global _optionset_labels
 
@@ -371,9 +376,9 @@ class YawdAdminSite(AdminSite):
     def index(self, request, extra_context={}):
         """
         This index view implementation adds Google Analytics
-        integration so that you can view important metrics 
+        integration so that you can view important metrics
         right from the administrator interface.
-        """        
+        """
         dashboard = self.dashboard_class(self._app_labels, self.name)
 
         #if admin google analytics is enabled
@@ -381,7 +386,7 @@ class YawdAdminSite(AdminSite):
             #get the analytics user credentials
             storage = Storage(ls.ADMIN_GOOGLE_ANALYTICS['token_file_name'])
             credential = storage.get()
-            
+
             if credential is None or credential.invalid == True:
                 extra_context['ga_data'] = { 'error' : 'authentication' }
             else:
@@ -419,7 +424,7 @@ class YawdAdminSite(AdminSite):
             'admin/%s/app_index.html' % app_label,
             'admin/app_index.html'
         ], context, current_app=self.name)
-        
+
 
     def i18n_javascript(self, request):
         """

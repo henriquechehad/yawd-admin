@@ -58,7 +58,7 @@ To register the admin site views, use the following (inside your `urls.py`):
 
 .. code-block:: python
 
-	from yawdadmin import admin_site
+	from yawdadmin.resources import admin_site
 
 	patterns = (''
 		url(r'^admin/', include(admin_site.urls)),
@@ -85,7 +85,7 @@ should use ``yawdadmin.admin_site`` instead of the original
 	class MyModelAdmin(admin.ModelAdmin):
 		pass
 
-	from yawdadmin import admin_site
+	from yawdadmin.resources import admin_site
 	#you can use this instead of admin.site.register():
 	admin_site.register(MyModel, MyModelAdmin)
 
@@ -99,7 +99,7 @@ the yawd-admin registry as follows (in `urls.py`):
 .. code-block:: python
 
 	from django.contrib import admin
-	from yawdadmin import admin_site
+	from yawdadmin.resources import admin_site
 
 	admin.autodiscover()
 	admin_site._registry.update(admin.site._registry)

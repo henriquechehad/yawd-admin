@@ -9,7 +9,7 @@ top-bar as follows:
 
 .. code-block:: python
 
-	from yawdadmin import admin_site
+	from yawdadmin.resources import admin_site
 	admin_site.register_top_menu_item('sites', icon_class="icon-th")
 
 The ``icon_class`` argument can be any icon from the ones that ship
@@ -77,7 +77,7 @@ method, specifying child menu items like this:
 
 .. code-block:: python
 
-	from yawdadmin import admin_site
+	from yawdadmin.resources import admin_site
 	admin_site.register_top_menu_item('Custom menu', icon_class="icon-th",
 		children=[{'name': 'Custom view 1', 'admin_url': reverse_lazy('custom-url-view'), 'order': 1, 'title_icon': 'icon-hand-left' },
 		          {'name': 'Custom view 2', 'admin_url': reverse_lazy('custom-url-view-2'), 'order': 2, separator: True, 'title_icon': 'icon-hand-right' }],

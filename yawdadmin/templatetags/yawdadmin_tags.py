@@ -15,7 +15,7 @@ from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language, ugettext as _
-from yawdadmin import admin_site
+from yawdadmin.resources import admin_site
 from yawdadmin.conf import settings as ls
 
 
